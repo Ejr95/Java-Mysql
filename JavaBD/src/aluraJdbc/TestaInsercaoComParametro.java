@@ -9,7 +9,8 @@ import java.sql.Statement;
 public class TestaInsercaoComParametro {
 	public static void main(String[] args) throws SQLException {
 		ConnectionFactory cf = new ConnectionFactory();
-		Connection connection = cf.recuperaConexao();
+		
+		try(Connection connection = cf.recuperaConexao()){
 		connection.setAutoCommit(false);
 		
 		try {
@@ -17,12 +18,12 @@ public class TestaInsercaoComParametro {
 			PreparedStatement stm = connection.prepareStatement("INSERT INTO PRODUTO (NOME, DESCRICAO) VALUES(?, ?)",
 			Statement.RETURN_GENERATED_KEYS);
 			
-			adicionarVariavel("SmartWatch", "mi band", stm);
-			adicionarVariavel("SmartWatch", "huwawei lite 2", stm);
+			adicionarVariavel("SmartWatch", "mi band pro 7", stm);
+			adicionarVariavel("SmartWatch", "huwawei lite sport 3", stm);
 			
 			connection.commit();
-			stm.close();
-			connection.close();
+		
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -30,7 +31,7 @@ public class TestaInsercaoComParametro {
 			connection.rollback();
 		}
 		
-		
+		}
 		
 	}
 
