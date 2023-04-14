@@ -17,6 +17,8 @@ public class TestaListagem {
 		PreparedStatement stm = conection.prepareStatement("SELECT ID, NOME, DESCRICAO FROM PRODUTO");
 		stm.execute();
 		
+		
+		
 		ResultSet rst = stm.getResultSet();
 		
 		while(rst.next()) {

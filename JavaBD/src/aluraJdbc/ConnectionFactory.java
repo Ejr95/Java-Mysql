@@ -17,7 +17,9 @@ public class ConnectionFactory {
 		comboPooledDataSource.setJdbcUrl("jdbc:mysql://localhost/javajdbc?useTimezone=true&serverTimezone=UTC");
 		comboPooledDataSource.setUser("root");
 		comboPooledDataSource.setPassword("1234");
+		comboPooledDataSource.setMaxPoolSize(15);
 		this.dataSource = comboPooledDataSource;
+		
 		
 	}
 	
