@@ -1,10 +1,16 @@
-package aluraJdbc;
+package Dao;
 
+import java.security.PublicKey;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import moldes.ConnectionFactory;
+import moldes.Produto;
 
 public class ProdutoDao {
 	private Connection connection;
@@ -13,7 +19,7 @@ public class ProdutoDao {
 		this.connection = connection;
 	}
 	
-	public void salvarProdutor(Produto produto) throws SQLException {
+	public void salvar(Produto produto) throws SQLException {
 		try(Connection connection = new ConnectionFactory().recuperaConexao()){
 			String sql = ("INSERT INTO PRODUTO (NOME,DESCRICAO) VALUES(?,?)");
 			
@@ -31,8 +37,32 @@ public class ProdutoDao {
 				}
 			}
 		}
-		
+				
 	}
+	
+	public List<Produto> listar() throws SQLException{
+		List<Produto> produtos = new ArrayList<Produto>();
+		
+		String sql = "SELECT ID,NOME,DESCRICAO FROM PRODUTO";
+		
+		try(PreparedStatement stm = connection.prepareStatement(sql)){
+			stm.execute();
+			try(ResultSet rst = stm.getResultSet()){
+				while(rst.next()) {
+					Produto produto = new Produto(rst.getInt(1),rst.getString(2),rst.getString(3));
+					
+					produtos.add(produto);
+					
+				}
+			}
+			
+			
+		}
+		return produtos;
+		
+	
+	}
+	
 	}
 	
 	

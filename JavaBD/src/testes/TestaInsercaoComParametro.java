@@ -1,10 +1,12 @@
-package aluraJdbc;
+package testes;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import moldes.ConnectionFactory;
 
 public class TestaInsercaoComParametro {
 	public static void main(String[] args) throws SQLException {

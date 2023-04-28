@@ -9,3 +9,7 @@
 /TestaInsercaoComProduto.class
 /PersistenciaProduto.class
 /ProdutoDao.class
+/TestaInsercaoEListagemProduto.class
+/TestaListagemDeCategorias.class
+/Categoria.class
+/CategoriaDao.class
