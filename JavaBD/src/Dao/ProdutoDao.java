@@ -1,5 +1,5 @@
 package Dao;
-
+import moldes.*;
 import java.security.PublicKey;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import moldes.Categoria;
 import moldes.ConnectionFactory;
 import moldes.Produto;
 
@@ -61,6 +62,28 @@ public class ProdutoDao {
 		return produtos;
 		
 	
+	}
+
+	public List<Produto> buscar(Categoria ct) throws SQLException {
+	List<Produto> produtos = new ArrayList<Produto>();
+		
+		String sql = "SELECT ID,NOME,DESCRICAO FROM PRODUTO WHERE CATEGORIA_ID = ?";
+		
+		try(PreparedStatement stm = connection.prepareStatement(sql)){
+			stm.setInt(1, ct.getId());
+			stm.execute();
+			try(ResultSet rst = stm.getResultSet()){
+				while(rst.next()) {
+					Produto produto = new Produto(rst.getInt(1),rst.getString(2),rst.getString(3));
+					
+					produtos.add(produto);
+					
+				}
+			}
+			
+			
+		}
+		return produtos;
 	}
 	
 	}
